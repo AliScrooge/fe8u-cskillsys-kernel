@@ -146,3 +146,8 @@ Male allies within 2 tiles receive -2 damage.[X]
 ## MSG_SKILL_Solidarity
 Solidarity:[NL]
 Critical and Critical Avoid +10 to adjacent allies.[X]
+
+## MSG_SKILL_MaleficAura
+Malefic Aura:[NL]
+Enemies within 2 tiles[NL]
+receive +2 magic damage.[X]

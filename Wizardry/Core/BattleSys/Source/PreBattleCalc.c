@@ -1014,36 +1014,41 @@ void PreBattleCalcAuraEffect(struct BattleUnit * attacker, struct BattleUnit * d
             if (1)
 #endif
             {
-                if (range1[i] == 1)
+                if (range1[i])
                 {
 #if (defined(SID_Hex) && (SID_Hex < MAX_SKILL_NUM))
                 if (SkillTester(unit, SID_Hex))
                     attacker->battleAvoidRate -= 10;
 #endif
             }
-                if (range2[i] == 1)
+                if (range2[i])
                 {
 /* Debuff */
 
 #if (defined(SID_Intimidate) && (SID_Intimidate < MAX_SKILL_NUM))
-                    if (SkillTester(unit, SID_Intimidate) )
+                    if (SkillTester(unit, SID_Intimidate))
                         attacker->battleAvoidRate -= 10;
 #endif
 
 #if (defined(SID_VoiceOfPeace) && (SID_VoiceOfPeace < MAX_SKILL_NUM))
-                    if (SkillTester(unit, SID_VoiceOfPeace) )
+                    if (SkillTester(unit, SID_VoiceOfPeace))
                         attacker->battleAttack -= 2;
 #endif
 
 #if (defined(SID_Peacebringer) && (SID_Peacebringer < MAX_SKILL_NUM))
-                    if (SkillTester(unit, SID_Peacebringer) )
+                    if (SkillTester(unit, SID_Peacebringer))
                         attacker->battleAttack -= 2;
 #endif
+
+#if (defined(SID_MaleficAura) && (SID_MaleficAura < MAX_SKILL_NUM))
+                    if (SkillTester(unit, SID_MaleficAura) && IsMagicAttack(defender))
+                        attacker->battleDefense-= 2;
+#endif
                 }
-                if (range3[i] == 1)
+                if (range3[i])
                 {
 #if (defined(SID_Anathema) && (SID_Anathema < MAX_SKILL_NUM))
-                    if (SkillTester(unit, SID_Anathema) && range3[i] == 1)
+                    if (SkillTester(unit, SID_Anathema))
                     {
                         attacker->battleAvoidRate -= 10;
                         attacker->battleDodgeRate -= 10;
@@ -1051,7 +1056,7 @@ void PreBattleCalcAuraEffect(struct BattleUnit * attacker, struct BattleUnit * d
 #endif
 
 #if (defined(SID_Daunt) && (SID_Daunt < MAX_SKILL_NUM))
-                    if (SkillTester(unit, SID_Daunt) && range3[i] == 1)
+                    if (SkillTester(unit, SID_Daunt))
                     {
                         attacker->battleHitRate -= 5;
                         attacker->battleCritRate -= 5;
